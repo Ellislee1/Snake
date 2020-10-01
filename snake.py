@@ -22,12 +22,12 @@ class Snake:
         self.start = centre
         self.snake = [centre]
         self.symbol = 1
-        self.direction = 4
+        self.direction = 0
         self.previous_last = centre
 
     def reset(self):
         self.snake = [self.start]
-        self.direction = 4
+        self.direction = 0
         self.previous_last = self.start
 
     def update_snake(self):
@@ -176,17 +176,21 @@ def main():
                 if event.key == pygame.K_ESCAPE:
                     game = False
                 if event.key == pygame.K_RIGHT:
-                    snake.direction = 3
-                    game_start = True
+                    if not snake.direction == 1:
+                        snake.direction = 3
+                        game_start = True
                 if event.key == pygame.K_DOWN:
-                    snake.direction = 2
-                    game_start = True
+                    if not snake.direction == 4:
+                        snake.direction = 2
+                        game_start = True
                 if event.key == pygame.K_LEFT:
-                    snake.direction = 1
-                    game_start = True
+                    if not snake.direction == 3:
+                        snake.direction = 1
+                        game_start = True
                 if event.key == pygame.K_UP:
-                    snake.direction = 4
-                    game_start = True
+                    if not snake.direction == 2:
+                        snake.direction = 4
+                        game_start = True
 
         screen.fill(black)
         draw_game(screen, board)
@@ -199,7 +203,7 @@ def main():
                 snake.reset()
                 board.reset(snake)
                 game_start = False
-        pygame.time.wait(100)
+        pygame.time.wait(75)
 
 
 main()
